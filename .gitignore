@@ -3,3 +3,6 @@ saida-maestro/
 resultado.xml
 .maestro/
 hierarquia.txt
+allure-results/
+allure-report/
+gh-pages/

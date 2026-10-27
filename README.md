@@ -1,6 +1,9 @@
 # Automação mobile com Maestro — My Demo App
 
 [![Testes mobile (Maestro)](https://github.com/EsterNevess/qa-mobile-maestro/actions/workflows/ci.yml/badge.svg)](https://github.com/EsterNevess/qa-mobile-maestro/actions/workflows/ci.yml)
+[![Relatório Allure](https://img.shields.io/badge/Relat%C3%B3rio-Allure-FF5722?logo=qase&logoColor=white)](https://esternevess.github.io/qa-mobile-maestro/)
+
+📊 **[Relatório Allure da última execução](https://esternevess.github.io/qa-mobile-maestro/)** — com os prints de cada passo anexados, publicado a cada push.
 
 Automação de testes de um aplicativo Android com **Maestro**, rodando em emulador dentro do CI.
 
@@ -65,6 +68,19 @@ vale mais que estar na última versão.
 
 Ao fim, o resultado sai em **JUnit XML** e as evidências de depuração (prints e logs de cada passo)
 ficam disponíveis como artefato da execução.
+
+## Relatório com evidências
+
+O Maestro entrega duas coisas separadas: **JUnit XML** (nome, status e duração de cada cenário) e
+uma pasta de depuração com **prints de cada passo**. O XML sozinho vira um relatório magro — diz o
+que falhou, não mostra.
+
+O script `scripts/junit_para_allure.py` junta as duas: para cada cenário do XML, procura os prints
+correspondentes pelo nome e os anexa ao resultado do Allure. Print que não casa com nenhum cenário
+não é descartado — vira um item próprio, porque evidência que ninguém encontra não serve para nada.
+
+O [relatório](https://esternevess.github.io/qa-mobile-maestro/) é publicado no GitHub Pages a cada
+execução, com histórico de tendência.
 
 ## Como rodar localmente
 
