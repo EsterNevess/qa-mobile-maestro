@@ -1,0 +1,31 @@
+# CT-M01 — Login com credenciais válidas
+#
+# Credenciais de demonstração publicadas pela própria Sauce Labs na tela
+# de login do app. Não há dado real envolvido.
+appId: com.saucelabs.mydemoapp.rn
+name: CT-M01 - Login com credenciais validas
+tags:
+  - login
+  - smoke
+---
+- runFlow: comum/abrir-app.yaml
+
+- tapOn:
+    id: "open menu"
+- tapOn: "Log In"
+- assertVisible: "Login"
+
+- tapOn:
+    id: "Username input field"
+- inputText: "bob@example.com"
+
+- tapOn:
+    id: "Password input field"
+- inputText: "10203040"
+
+- hideKeyboard
+- tapOn:
+    id: "Login button"
+
+# Depois de autenticar, o app volta para a lista de produtos.
+- assertVisible: "Products"

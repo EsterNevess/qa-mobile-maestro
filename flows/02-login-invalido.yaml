@@ -1,0 +1,32 @@
+# CT-M02 — Login com senha incorreta
+#
+# Caminho negativo: o app precisa recusar e explicar o motivo, sem deixar
+# o usuário passar. Testar só o caminho feliz esconde exatamente o tipo de
+# falha que chega ao usuário final.
+appId: com.saucelabs.mydemoapp.rn
+name: CT-M02 - Login com senha incorreta
+tags:
+  - login
+---
+- runFlow: comum/abrir-app.yaml
+
+- tapOn:
+    id: "open menu"
+- tapOn: "Log In"
+- assertVisible: "Login"
+
+- tapOn:
+    id: "Username input field"
+- inputText: "bob@example.com"
+
+- tapOn:
+    id: "Password input field"
+- inputText: "senha_errada"
+
+- hideKeyboard
+- tapOn:
+    id: "Login button"
+
+# Permanece na tela de login e exibe a mensagem de erro.
+- assertVisible:
+    text: ".*Provided credentials do not match any user in this service.*"

@@ -1,0 +1,72 @@
+name: Testes mobile (Maestro)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  mobile:
+    # Versão fixa, não "latest": o rótulo latest muda de distribuição sem aviso
+    # e leva junto o suporte das ferramentas.
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      # O emulador precisa de virtualização por hardware. Sem isto ele sobe
+      # por software e fica lento a ponto de estourar o tempo limite.
+      - name: Habilitar KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' \
+            | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Preparar Java (requisito do Maestro e do SDK Android)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Baixar o app em teste
+        run: |
+          curl -L -o app.apk \
+            "https://github.com/saucelabs/my-demo-app-rn/releases/download/v1.3.0/Android-MyDemoAppRN.1.3.0.build-244.apk"
+          ls -lh app.apk
+
+      - name: Instalar o Maestro
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+          echo "$HOME/.maestro/bin" >> $GITHUB_PATH
+
+      - name: Subir o emulador e rodar os fluxos
+        id: testes
+        continue-on-error: true
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          target: google_apis
+          arch: x86_64
+          profile: pixel_5
+          disable-animations: true
+          script: |
+            adb install -r app.apk
+            maestro test flows/ --format junit --output resultado.xml --debug-output saida-maestro
+
+      - name: Publicar resultado e evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultado-maestro
+          path: |
+            resultado.xml
+            saida-maestro/
+          if-no-files-found: ignore
+
+      - name: Refletir o resultado dos fluxos
+        if: steps.testes.outcome == 'failure'
+        run: |
+          echo "Algum fluxo falhou. Baixe o artefato para ver os prints e o log."
+          exit 1

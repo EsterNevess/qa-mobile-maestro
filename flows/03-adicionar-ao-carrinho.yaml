@@ -1,0 +1,27 @@
+# CT-M03 — Adicionar produto ao carrinho
+#
+# Fluxo central de qualquer e-commerce: se este quebra, não há venda.
+appId: com.saucelabs.mydemoapp.rn
+name: CT-M03 - Adicionar produto ao carrinho
+tags:
+  - carrinho
+  - smoke
+---
+- runFlow: comum/abrir-app.yaml
+
+# Abre o primeiro produto da listagem.
+- tapOn:
+    id: "store item"
+    index: 0
+
+- assertVisible: "Add To Cart"
+- tapOn: "Add To Cart"
+
+# O contador do carrinho é a confirmação visível para o usuário.
+- assertVisible:
+    id: "cart badge"
+    text: "1"
+
+- tapOn:
+    id: "cart badge"
+- assertVisible: "My Cart"

@@ -1,0 +1,11 @@
+# Subfluxo reaproveitado por todos os cenários.
+# Deixa o app sempre no mesmo estado inicial: aberto e na tela de produtos.
+#
+# `clearState` apaga os dados do app antes de abrir. Sem isso, um cenário
+# que faz login deixa a sessão ativa e o seguinte começa de um lugar
+# diferente do esperado — e a suíte passa a depender da ordem de execução.
+appId: com.saucelabs.mydemoapp.rn
+---
+- launchApp:
+    clearState: true
+- assertVisible: "Products"
