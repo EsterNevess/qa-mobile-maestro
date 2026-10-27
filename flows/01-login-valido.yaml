@@ -2,6 +2,11 @@
 #
 # Credenciais de demonstração publicadas pela própria Sauce Labs na tela
 # de login do app. Não há dado real envolvido.
+#
+# Sobre os seletores: este app usa `accessibilityLabel` no Android, que vira
+# content-desc — e não `resource-id`. Por isso os elementos são buscados por
+# `text`, que no Maestro casa com o texto visível OU com o rótulo de
+# acessibilidade. Usar `id` aqui não encontra nada.
 appId: com.saucelabs.mydemoapp.rn
 name: CT-M01 - Login com credenciais validas
 tags:
@@ -11,21 +16,22 @@ tags:
 - runFlow: comum/abrir-app.yaml
 
 - tapOn:
-    id: "open menu"
+    text: "open menu"
 - tapOn: "Log In"
-- assertVisible: "Login"
+- assertVisible:
+    text: "login screen"
 
 - tapOn:
-    id: "Username input field"
+    text: "Username input field"
 - inputText: "bob@example.com"
 
 - tapOn:
-    id: "Password input field"
+    text: "Password input field"
 - inputText: "10203040"
 
 - hideKeyboard
 - tapOn:
-    id: "Login button"
+    text: "Login button"
 
 # Depois de autenticar, o app volta para a lista de produtos.
 - assertVisible: "Products"

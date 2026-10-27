@@ -11,21 +11,22 @@ tags:
 - runFlow: comum/abrir-app.yaml
 
 - tapOn:
-    id: "open menu"
+    text: "open menu"
 - tapOn: "Log In"
-- assertVisible: "Login"
+- assertVisible:
+    text: "login screen"
 
 - tapOn:
-    id: "Username input field"
+    text: "Username input field"
 - inputText: "bob@example.com"
 
 - tapOn:
-    id: "Password input field"
+    text: "Password input field"
 - inputText: "senha_errada"
 
 - hideKeyboard
 - tapOn:
-    id: "Login button"
+    text: "Login button"
 
 # Permanece na tela de login e exibe a mensagem de erro.
 - assertVisible:

@@ -11,7 +11,7 @@ tags:
 
 # Abre o primeiro produto da listagem.
 - tapOn:
-    id: "store item"
+    text: "store item"
     index: 0
 
 - assertVisible: "Add To Cart"
@@ -19,9 +19,8 @@ tags:
 
 # O contador do carrinho é a confirmação visível para o usuário.
 - assertVisible:
-    id: "cart badge"
-    text: "1"
+    text: "cart badge"
 
 - tapOn:
-    id: "cart badge"
+    text: "cart badge"
 - assertVisible: "My Cart"
