@@ -53,6 +53,16 @@ jobs:
           disable-animations: true
           script: |
             adb install -r app.apk
+
+            # Diagnostico: imprime a arvore de elementos real do app.
+            # Seletor estimado e seletor verificado sao coisas diferentes.
+            adb shell monkey -p com.saucelabs.mydemoapp.rn -c android.intent.category.LAUNCHER 1
+            sleep 12
+            maestro hierarchy > hierarquia.txt 2>&1 || true
+            echo "===== ARVORE DE ELEMENTOS ====="
+            grep -oE '"(resource-id|text|accessibilityText|hintText)": "[^"]*"' hierarquia.txt | sort -u | head -80
+            echo "===== FIM ====="
+
             maestro test flows/ --format junit --output resultado.xml --debug-output saida-maestro
 
       - name: Publicar resultado e evidências
