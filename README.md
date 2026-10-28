@@ -12,6 +12,8 @@ Fecha a última camada que faltava no meu portfólio de automação: já tinha
 [BDD](https://github.com/EsterNevess/qa-bdd-saucedemo) e
 [performance](https://github.com/EsterNevess/qa-performance-serverest) — faltava mobile.
 
+> **Veja também:** [`rn-loja-demo`](https://github.com/EsterNevess/rn-loja-demo), um app React Native com testes unitários em Jest e testes de ponta a ponta em Maestro no mesmo repositório. Este projeto testa um aplicativo de terceiros; aquele traz o aplicativo junto.
+
 ## O app em teste
 
 O [My Demo App](https://github.com/saucelabs/my-demo-app-rn) da Sauce Labs, um e-commerce em React
