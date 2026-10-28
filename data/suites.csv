@@ -1,4 +1,5 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","11957","CT-M03 - Adicionar produto ao carrinho","","2026-10-27","passed","2026-10-27","","Mobile (Maestro)","",""
-"","27128","CT-M01 - Login com credenciais validas","","2026-10-27","passed","2026-10-27","","Mobile (Maestro)","",""
-"","30469","CT-M02 - Login com senha incorreta","","2026-10-27","passed","2026-10-27","","Mobile (Maestro)","",""
+"","19300","CT-M02 - Login com senha incorreta","","2026-10-28","failed","2026-10-28","","Mobile (Maestro)","",""
+"","19559","CT-M03 - Adicionar produto ao carrinho","","2026-10-28","failed","2026-10-28","","Mobile (Maestro)","",""
+"","21870","CT-M01 - Login com credenciais validas","","2026-10-28","failed","2026-10-28","","Mobile (Maestro)","",""
+"","0","Evidências da execução (não associadas a um cenário)","","2026-10-28","passed","2026-10-28","","Mobile (Maestro)","",""
